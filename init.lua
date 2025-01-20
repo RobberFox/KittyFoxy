@@ -4,6 +4,8 @@ vim.g.maplocalleader = "\\"
 -- 3 ways to refer to command-line commands: '<cmd>commandhere', ':commandhere' vim.cmd.commandhere'
 vim.keymap.set("n", "<leader>ep", vim.cmd.Explore)
 
+map("n", "v$", "vg_")
+
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 
@@ -43,8 +45,8 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>")
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>")
 
 -- Write, quit
-vim.keymap.set({"n", "i"},"<A-s>", "<cmd>wall<CR>")
-vim.keymap.set({"n", "i"},"<A-q>", "<cmd>qall<CR>")
+vim.keymap.set({"n", "i"},"<C-s>", "<cmd>wall<CR>")
+vim.keymap.set({"n", "i"},"<C-q>", "<cmd>qall<CR>")
 
 -- NOTE: ### MEGA KEYBINDING ###
 
@@ -157,5 +159,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.opt.shiftwidth = 4
 		vim.opt.softtabstop = 4
 		vim.opt.expandtab = false
+	end
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	desc = 'Trim trailing empty lines',
+	group = vim.api.nvim_create_augroup('robberfox-trim', { clear = true }),
+	pattern = "*",
+	callback = function()
+		vim.cmd([[:%s/\($\n\s*\)\+\%$//e]])
 	end
 })

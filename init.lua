@@ -4,7 +4,7 @@ vim.g.maplocalleader = "\\"
 -- 3 ways to refer to command-line commands: '<cmd>commandhere', ':commandhere' vim.cmd.commandhere'
 vim.keymap.set("n", "<leader>ep", vim.cmd.Explore)
 
-map("n", "v$", "vg_")
+vim.keymap.set("n", "v$", "vg_")
 
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
